@@ -1,32 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>system</title>
-    <script>
-        function calculateOtp() {
-            var productSerNum = document.getElementById("product_ser_num").value;
-            var otpPin = document.getElementById("otp_pin").value;
+#include <stdio.h>
+#include <math.h>
 
-            // Calculate OTP
-            var otp4 = 999999 - (((productSerNum * 2) + (((otpPin % 100) * 10000) + (Math.floor(otpPin / 100)) + (((otpPin % 100) + Math.floor(otpPin / 100)) % 100) * 100)) % 1000000);
+void calculateOtp(int productSerNum, int otpPin) {
+    // Calculate OTP
+    int otp4 = 999999 - (((productSerNum * 2) + (((otpPin % 100) * 10000) + (otpPin / 100) + (((otpPin % 100) + (otpPin / 100)) % 100) * 100)) % 1000000);
 
-            // Display the result
-            document.getElementById("result").innerText = "OTP 4: " + otp4;
-        }
-    </script>
-</head>
-<body>
-    <h2>make password</h2>
-    <form onsubmit="event.preventDefault(); calculateOtp();">
-        <label for="product_ser_num">Product Serial Number:</label>
-        <input type="number" id="product_ser_num" required>
-        <br><br>
-        <label for="otp_pin">OTP Pin:</label>
-        <input type="number" id="otp_pin" required>
-        <br><br>
-        <button type="submit">result</button>
-    </form>
-    <p id="result"></p>
-</body>
-</html>
- 
+    // Display the result
+    printf("OTP 4: %d\n", otp4);
+}
+
+int main() {
+    int productSerNum, otpPin;
+
+    // Get user input
+    printf("Enter Product Serial Number: ");
+    scanf("%d", &productSerNum);
+
+    printf("Enter OTP Pin: ");
+    scanf("%d", &otpPin);
+
+    // Calculate and display OTP
+    calculateOtp(productSerNum, otpPin);
+
+    return 0;
+}
